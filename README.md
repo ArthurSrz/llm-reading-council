@@ -1,4 +1,4 @@
-# Le conseil des Machines Pensantes
+# Le conseil des machines pensantes
 
 ![llmcouncil](header.jpg)
 
