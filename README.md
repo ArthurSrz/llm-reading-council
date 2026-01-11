@@ -1,87 +1,121 @@
-# LLM Council
+# Le conseil des Machines Pensantes
 
 ![llmcouncil](header.jpg)
 
-The idea of this repo is that instead of asking a question to your favorite LLM provider (e.g. OpenAI GPT 5.1, Google Gemini 3.0 Pro, Anthropic Claude Sonnet 4.5, xAI Grok 4, eg.c), you can group them into your "LLM Council". This repo is a simple, local web app that essentially looks like ChatGPT except it uses OpenRouter to send your query to multiple LLMs, it then asks them to review and rank each other's work, and finally a Chairman LLM produces the final response.
+*Délibérations de la commission permanente des intelligences artificielles*
 
-In a bit more detail, here is what happens when you submit a query:
+---
 
-1. **Stage 1: First opinions**. The user query is given to all LLMs individually, and the responses are collected. The individual responses are shown in a "tab view", so that the user can inspect them all one by one.
-2. **Stage 2: Review**. Each individual LLM is given the responses of the other LLMs. Under the hood, the LLM identities are anonymized so that the LLM can't play favorites when judging their outputs. The LLM is asked to rank them in accuracy and insight.
-3. **Stage 3: Final response**. The designated Chairman of the LLM Council takes all of the model's responses and compiles them into a single final answer that is presented to the user.
+## Exposé des motifs
 
-## Vibe Code Alert
+Considérant que la République, une et indivisible, ne saurait confier ses interrogations les plus pressantes à un unique oracle numérique — fût-il américain, californien, ou issu des laboratoires de la rue de Grenelle —, le présent dispositif institue un **conseil délibératif** composé de plusieurs machines pensantes.
 
-This project was 99% vibe coded as a fun Saturday hack because I wanted to explore and evaluate a number of LLMs side by side in the process of [reading books together with LLMs](https://x.com/karpathy/status/1990577951671509438). It's nice and useful to see multiple responses side by side, and also the cross-opinions of all LLMs on each other's outputs. I'm not going to support it in any way, it's provided here as is for other people's inspiration and I don't intend to improve it. Code is ephemeral now and libraries are over, ask your LLM to change it in whatever way you like.
+Car, comme l'énonçait si justement Pierre Mendès France : *« Gouverner, c'est choisir. »* Et pour bien choisir, encore faut-il entendre plusieurs avis, les soumettre à l'examen contradictoire, et désigner un président du Conseil pour en tirer la synthèse.
 
-## Setup
+Cette application web, sobre comme un costume de la rue de Rivoli, utilise le protocole OpenRouter pour convoquer simultanément des LLM open-source et **surtout gratuits (!)**, leur demander de s'évaluer mutuellement (à bulletins secrets, naturellement), avant qu'un président de séance ne proclame la réponse définitive.
 
-### 1. Install Dependencies
+## Ordre du jour des délibérations
 
-The project uses [uv](https://docs.astral.sh/uv/) for project management.
+Lorsque le citoyen soumet une question au Conseil, la procédure suivante est observée :
 
-**Backend:**
+### Article premier — Première lecture
+
+La question de l'administré est transmise à l'ensemble des conseillers numériques. Chacun rédige sa réponse, indépendamment et sans concertation préalable. Les interventions sont consignées dans des onglets distincts, consultables par le requérant tel un procès-verbal de séance.
+
+### Article 2 — Commission d'examen à huis clos
+
+Chaque conseiller reçoit les réponses de ses pairs, mais — innovation décisive ! — les identités sont anonymisées. Point de favoritisme, point de *combinazione* : les réponses sont désignées « Réponse A », « Réponse B », etc., comme les bulletins dans l'urne.
+
+Chaque machine évalue et classe ses collègues selon des critères de justesse et de perspicacité. Car, ainsi que le rappelait Edgar Faure avec son ironie coutumière : *« L'immobilisme est en marche, et rien ne l'arrêtera »* — sauf, peut-être, dans ce cas, un bon système de notation.
+
+### Article 3 — Motion de synthèse
+
+Le président du Conseil, fort de l'ensemble des délibérations, rédige la réponse finale. Il compile, il synthétise, il tranche. Comme au Palais-Bourbon, il faut bien que quelqu'un conclue — même si, en IVe République, le gouvernement serait déjà tombé avant la fin de la phrase.
+
+---
+
+## Avertissement : code de circonstance
+
+Le présent dispositif fut élaboré un samedi, dans l'urgence caractéristique de tout gouvernement de la IVe République. À l'instar du cabinet Pleven II (durée de vie : sept mois, trois semaines et deux jours), ce code n'est pas conçu pour l'éternité.
+
+Il fut « vibe-codé », comme on formait jadis les coalitions : rapidement, sans trop y croire, dans l'espoir que l'édifice tienne jusqu'au prochain remaniement ministériel.
+
+L'auteur, tel Guy Mollet recevant les tomates d'Alger en février 1956, décline toute responsabilité quant aux projectiles virtuels. Le code est fourni « en l'état », comme les promesses électorales. Les bibliothèques sont désormais caduques ; demandez à votre propre machine pensante de modifier ce qui vous déplaît.
+
+---
+
+## Installation du dispositif
+
+### 1. Constitution des dépendances
+
+Le projet utilise [uv](https://docs.astral.sh/uv/) pour l'intendance pythonesque.
+
+**Chancellerie (backend) :**
 ```bash
 uv sync
 ```
 
-**Frontend:**
+**Préfecture (frontend) :**
 ```bash
 cd frontend
 npm install
 cd ..
 ```
 
-### 2. Configure API Key
+### 2. Accréditation auprès du bureau central
 
-Create a `.env` file in the project root:
+Créer un fichier `.env` à la racine du projet :
 
 ```bash
 OPENROUTER_API_KEY=sk-or-v1-...
 ```
 
-Get your API key at [openrouter.ai](https://openrouter.ai/). Make sure to purchase the credits you need, or sign up for automatic top up.
+Obtenir ses lettres de créance sur [openrouter.ai](https://openrouter.ai/). Prévoir les crédits nécessaires, ou souscrire au réapprovisionnement automatique.
 
-### 3. Configure Models (Optional)
+### 3. Nomination des conseillers
 
-Edit `backend/config.py` to customize the council:
+Éditer `backend/config.py` pour composer votre Conseil :
 
 ```python
 COUNCIL_MODELS = [
-    "openai/gpt-5.1",
-    "google/gemini-3-pro-preview",
-    "anthropic/claude-sonnet-4.5",
-    "x-ai/grok-4",
+    "openai/gpt-oss-120b:free",
+    "openai/gpt-oss-20b:free",
+    "mistralai/mistral-small-3.1-24b-instruct:free",
+    "google/gemma-3-27b-it:free",
 ]
 
-CHAIRMAN_MODEL = "google/gemini-3-pro-preview"
+CHAIRMAN_MODEL = "openai/gpt-oss-120b:free"
 ```
 
-## Running the Application
+---
 
-**Option 1: Use the start script**
+## Convocation de l'assemblée
+
+**Option 1 : décret d'ouverture automatique**
 ```bash
 ./start.sh
 ```
 
-**Option 2: Run manually**
+**Option 2 : convocation manuelle**
 
-Terminal 1 (Backend):
+Terminal 1 (chancellerie) :
 ```bash
 uv run python -m backend.main
 ```
 
-Terminal 2 (Frontend):
+Terminal 2 (préfecture) :
 ```bash
 cd frontend
 npm run dev
 ```
 
-Then open http://localhost:5173 in your browser.
+Puis ouvrir http://localhost:5173 dans votre navigateur.
 
-## Tech Stack
+---
 
-- **Backend:** FastAPI (Python 3.10+), async httpx, OpenRouter API
-- **Frontend:** React + Vite, react-markdown for rendering
-- **Storage:** JSON files in `data/conversations/`
-- **Package Management:** uv for Python, npm for JavaScript
+## Architecture technique
+
+- **Chancellerie :** FastAPI (Python 3.10+), httpx asynchrone, API OpenRouter
+- **Préfecture :** React + Vite, react-markdown pour le rendu
+- **Archives :** fichiers JSON dans `data/conversations/`
+- **Intendance :** uv pour Python, npm pour JavaScript
