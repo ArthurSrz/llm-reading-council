@@ -3,7 +3,7 @@ project:
   output-dir: _book
 
 website:
-  site-url: https://arthursrz.github.io/llm-reading-council/
+  site-url: https://arthursrz.github.io/conseil-machines-pensantes/
 
 lang: fr
 
